@@ -1,34 +1,114 @@
-.collapse-toggle-icon:before {
-    /* symbol for "opening" panels */
-    font-family: 'Glyphicons Halflings';  /* essential for enabling glyphicon */
-    content: "\e159";    /* glyphicon glyphicon-expand, taken from bootstrap.css */
-    float: left;        /* adjust as needed */
-    padding-right: 3px;
-}
+@import './colors';
+@import './transitions';
 
-.collapse-toggle-icon.collapsed:before {
-    /* symbol for "collapsed" panels */
-    content: "\e158";    /* glyphicon glyphicon-collapse-down, taken from bootstrap.css */
-}
-
-.modal-title {
-    font-family: "Roboto";
-    font-weight: 700;
-}
-
-.modal-container {
+.addTrackDialogToggable, .addTrackDialogToggableOpen {
   position: relative;
-}
-.modal-container .modal, .modal-container .modal-backdrop {
-  position: absolute;
+  z-index: 2;
+  margin-top: -1px;
+
+  &:last-child {
+    margin-bottom: -1px;
+  }
 }
 
-.modal-dialog{
+.addTrackDialogToggler, .addTrackDialogTogglerActive {
+  position: relative;
+  display: block;
+
+  button {
     position: relative;
-    display: table; //This is important
-    overflow-y: auto;
-    overflow-x: auto;
-    width: 600px;
-    min-width: 300px;
-    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    text-align: left;
+    border-top: 1px solid $gray-light;
+    border-bottom: 1px solid $gray-light;
+    border-left: 1px solid $gray-lighter;
+    border-right: 1px solid $gray-lighter;
+    background: $gray-lighter;
+    transition: color $normal $ease,
+                font-weight $normal $ease,
+                border-color $normal $ease,
+                background $normal $ease;
+
+    &:focus {
+      outline: none;
+      border-color: $white;
+      box-shadow: 0 0 0 2px $blue-lighter;
+    }
+
+    &:disabled {
+      color: $gray-medium;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.addTrackDialogTogglerActive button {
+  color: $white;
+  font-weight: bold;
+  background: $primary;
+  border-color: $primary;
+}
+
+.addTrackDialogTogglerLabel {
+  white-space: nowrap;
+}
+
+.addTrackDialogTogglerValue {
+  position: relative;
+  flex-grow: 1;
+  height: 2rem;
+
+  span {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0.5rem;
+    color: $gray-dark;
+    font-style: italic;
+    transition: opacity $normal $ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.addTrackDialogTogglerActive .addTrackDialogTogglerValue {
+  opacity: 0;
+}
+
+.addTrackDialogTogglerTriangle {
+  width: 0;
+  height: 0;
+  border-left: 0.5rem solid transparent;
+  border-right: 0.5rem solid transparent;
+  border-bottom: 0.5rem solid $gray-dark;
+  transition: transform $normal $ease,
+              border-bottom-color $normal $ease;
+}
+
+.addTrackDialogTogglerActive .addTrackDialogTogglerTriangle {
+  border-bottom-color: $white;
+  transform: rotate(180deg);
+}
+
+.addTrackDialogToggableContent {
+  display: none;
+}
+
+.addTrackDialogToggableContentOpen {
+  padding: 0.5rem 1rem 1rem 1rem;
+}
+
+.addTrackDialogNext, .addTrackDialogSubmit {
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+.addTrackDialogSubmit {
+  font-weight: bold;
 }

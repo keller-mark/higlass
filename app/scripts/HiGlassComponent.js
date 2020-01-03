@@ -80,7 +80,10 @@ import {
 import styles from '../styles/HiGlass.module.scss'; // eslint-disable-line no-unused-vars
 import stylesMTHeader from '../styles/ViewHeader.module.scss'; // eslint-disable-line no-unused-vars
 
-import stylesGlobal from '../styles/HiGlass.scss'; // eslint-disable-line no-unused-vars
+import '../styles/flexbox.scss';
+import '../styles/buttons.scss';
+import '../styles/inputs.scss';
+import '../styles/HiGlass.scss';
 
 const NUM_GRID_COLUMNS = 12;
 const DEFAULT_NEW_VIEW_HEIGHT = 12;
@@ -305,6 +308,7 @@ class HiGlassComponent extends React.Component {
     this.wheelHandlerBound = this.wheelHandler.bind(this);
     this.mouseMoveHandlerBound = this.mouseMoveHandler.bind(this);
     this.onMouseLeaveHandlerBound = this.onMouseLeaveHandler.bind(this);
+    this.onTrackSourceChangedBound = this.onTrackSourceChanged.bind(this);
     this.onBlurHandlerBound = this.onBlurHandler.bind(this);
     this.openModalBound = this.openModal.bind(this);
     this.closeModalBound = this.closeModal.bind(this);
@@ -521,6 +525,14 @@ class HiGlassComponent extends React.Component {
 
   getTrackRenderer(viewUid) {
     return this.tiledPlots[viewUid].trackRenderer;
+  }
+
+  onTrackSourceChanged(newTrackSource) {
+    this.setState((prevState) => {
+      const newViewConfig = { ...prevState.viewConfig };
+      newViewConfig.trackSourceServers = [...newTrackSource];
+      return { viewConfig: newViewConfig };
+    });
   }
 
   /**
@@ -2228,7 +2240,9 @@ class HiGlassComponent extends React.Component {
   handleTracksAdded(viewId, newTracks, position, host) {
     this.storeTrackSizes(viewId);
 
-    for (const newTrack of newTracks) { this.handleTrackAdded(viewId, newTrack, position, host); }
+    for (const newTrack of newTracks) {
+      this.handleTrackAdded(viewId, newTrack, position, host);
+    }
   }
 
   /**
@@ -2319,6 +2333,8 @@ class HiGlassComponent extends React.Component {
 
     newTrack.position = position;
     const trackInfo = this.getTrackInfo(newTrack.type);
+
+    if (!trackInfo) return null;
 
     newTrack.width = trackInfo.defaultWidth
       || (trackInfo.defaultOptions && trackInfo.defaultOptions.minWidth)
@@ -3964,6 +3980,7 @@ class HiGlassComponent extends React.Component {
             onTrackPositionChosen={this.handleTrackPositionChosen.bind(this)}
             onTracksAdded={(newTracks, position, host) => (
               this.handleTracksAdded(view.uid, newTracks, position, host))}
+            onTrackSourceChanged={this.onTrackSourceChangedBound}
             onUnlockValueScale={uid => this.handleUnlockValueScale(view.uid, uid)}
             onValueScaleChanged={uid => this.syncValueScales(view.uid, uid)}
             overlays={view.overlays}

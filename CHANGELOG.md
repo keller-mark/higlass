@@ -4,6 +4,7 @@
 - Update BedLikeTrack to display strand-specific entries
 - Updated default plot types when adding tracks
 - When adding multiple tracks at once that have different datatype, each track is added with its default plot type. The plot type chooser is hidden.
+- New UI for the track adding modal. It also allows adjusting the track source server now.
 
 ## v1.7.3
 

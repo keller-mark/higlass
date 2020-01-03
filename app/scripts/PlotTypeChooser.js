@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // Configs
 import {
@@ -13,7 +14,7 @@ import {
 } from './utils';
 
 // Styles
-import '../styles/PlotTypeChooser.css';
+import '../styles/PlotTypeChooser.module.scss';
 
 class PlotTypeChooser extends React.Component {
   constructor(props) {
@@ -138,5 +139,12 @@ class PlotTypeChooser extends React.Component {
     );
   }
 }
+
+PlotTypeChooser.propTypes = {
+  datatypes: PropTypes.array.isRequired,
+  onPlotTypeSelected: PropTypes.func.isRequired,
+  orientation: PropTypes.string.isRequired,
+  plotType: PropTypes.string,
+};
 
 export default PlotTypeChooser;

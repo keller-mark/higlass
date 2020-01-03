@@ -2,7 +2,7 @@
 @import './sizes';
 @import './transitions';
 
-.dialog-header {
+.dialog-header, .dialog-header-max {
   position: relative;
   z-index: 2;
   display: flex;
@@ -23,6 +23,15 @@
   }
 }
 
+.dialog-header-max {
+  margin: 0;
+  padding: 1rem;
+}
+
+.dialog-main-full-height {
+  position: relative;
+}
+
 .dialog-main-max-height {
   position: absolute;
   z-index: 1;
@@ -34,12 +43,21 @@
   overflow: auto;
 }
 
-.dialog-footer, .dialog-footer-max-height {
+.dialog-main-max {
+  overflow-y: auto;
+}
+
+.dialog-footer, .dialog-footer-max, .dialog-footer-max-height {
   display: flex;
   justify-content: space-between;
   margin: $base+px (-1*$base)+px 0 (-1*$base)+px;
   padding: $base+px $base+px 0 $base+px;
   border-top: 1px solid $gray-light;
+}
+
+.dialog-footer-max {
+  margin: 0;
+  padding: 1rem;
 }
 
 .dialog-footer, .dialog-footer-max-height {

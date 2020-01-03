@@ -1,0 +1,43 @@
+@import './colors';
+
+.trackSource {
+  display: flex;
+  margin-bottom: 0.5rem;
+}
+
+.trackSourceInput {
+  flex-grow: 1;
+  margin-right: -1px;
+  border-radius: 0.25rem 0 0 0.25rem;
+
+  &:focus {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+.trackSourceDelete, .trackSourceSave {
+  min-width: 6rem;
+}
+
+.trackSourceDelete {
+  border-radius: 0 0.25rem 0.25rem 0;
+
+  &:hover {
+    color: $white;
+    background: $red;
+    box-shadow: 0 0 0 1px darken($red, 10%);
+  }
+
+  &:focus {
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 0 0 2px darken($red, 10%);
+  }
+}
+
+.trackSourceFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

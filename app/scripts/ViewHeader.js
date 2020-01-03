@@ -28,7 +28,6 @@ class ViewHeader extends React.Component {
     this.plusImg = null;
 
     this.state = {
-      addTrackPositionMenuUid: null,
       addTrackPositionMenuPosition: null,
       configMenuUid: null,
       configMenuPosition: null,
@@ -64,9 +63,8 @@ class ViewHeader extends React.Component {
    * The user has clicked on the 'plus' sign at the top of a TiledPlot
    * so we need to open the Track Position Chooser dialog
    */
-  handleAddTrackPositionMenuOpened(uid) {
+  handleAddTrackPositionMenuOpened() {
     this.setState({
-      addTrackPositionMenuUid: uid,
       addTrackPositionMenuPosition: this.plusImg.getBoundingClientRect(),
     });
   }
@@ -81,7 +79,6 @@ class ViewHeader extends React.Component {
     this.props.onTrackPositionChosen(position);
 
     this.setState({
-      addTrackPositionMenuUid: null,
       addTrackPositionMenuPosition: null,
     });
   }
@@ -96,7 +93,6 @@ class ViewHeader extends React.Component {
           onMenuClosed={
             () => {
               this.setState({
-                addTrackPositionMenuUid: null,
                 addTrackPositionMenuPosition: null,
               });
             }
@@ -329,6 +325,7 @@ ViewHeader.propTypes = {
   onTrackPositionChosen: PropTypes.func.isRequired,
   onUnlockLocation: PropTypes.func.isRequired,
   onUnlockZoom: PropTypes.func.isRequired,
+  onViewOptionsChanged: PropTypes.func.isRequired,
   onUnlockZoomAndLocation: PropTypes.func.isRequired,
   onYankLocation: PropTypes.func.isRequired,
   onYankZoom: PropTypes.func.isRequired,

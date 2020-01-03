@@ -98,8 +98,8 @@ class ViewConfigEditor extends React.Component {
       <Dialog
         cancelShortcut="ESC"
         cancelTitle="Discard Changes"
+        fullHeight={true}
         hide={this.state.hide}
-        maxHeight={true}
         okayShortcut="⌘+Enter"
         okayTitle="Save and Close"
         onCancel={this.props.onCancel}

@@ -20,19 +20,20 @@ const Dialog = (props) => {
   };
 
   return (
-    <Modal closeButton={false} hide={props.hide} maxHeight={props.maxHeight}>
-      <header styleName="dialog-header">
+    <Modal
+      closeButton={false}
+      fullHeight={props.fullHeight}
+      hide={props.hide}
+      maxHeight={props.maxHeight}
+    >
+      <header styleName={`dialog-header ${Number.isFinite(props.maxHeight) ? 'dialog-header-max' : ''}`}>
         <h3>{props.title}</h3>
         <Button onClick={handleCancel}><Cross /></Button>
       </header>
-      {props.maxHeight ? (
-        <main styleName={props.maxHeight ? 'dialog-main-max-height' : ''}>
-          {props.children}
-        </main>
-      ) : (
-        <main>{props.children}</main>
-      )}
-      <footer styleName={props.maxHeight ? 'dialog-footer-max-height' : 'dialog-footer'}>
+      <main styleName={`${props.fullHeight ? 'dialog-main-full-height' : ''} ${Number.isFinite(props.maxHeight) ? 'dialog-main-max-height' : ''}`}>
+        {props.children}
+      </main>
+      <footer styleName={`dialog-footer ${Number.isFinite(props.maxHeight) ? 'dialog-footer-max-height' : ''}`}>
         {props.okayOnly ? (
           <div />
         ) : (
@@ -51,7 +52,8 @@ const Dialog = (props) => {
 Dialog.defaultProps = {
   cancelTitle: 'Cancel',
   hide: false,
-  maxHeight: false,
+  fullHeight: false,
+  maxHeight: Number.NaN,
   okayOnly: false,
   okayTitle: 'Ok',
 };
@@ -61,7 +63,8 @@ Dialog.propTypes = {
   cancelTitle: PropTypes.string,
   children: PropTypes.func.isRequired,
   hide: PropTypes.bool,
-  maxHeight: PropTypes.bool,
+  fullHeight: PropTypes.bool,
+  maxHeight: PropTypes.number,
   modal: PropTypes.object.isRequired,
   okayShortcut: PropTypes.string,
   okayTitle: PropTypes.string,
