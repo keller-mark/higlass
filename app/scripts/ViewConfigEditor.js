@@ -58,7 +58,7 @@ class ViewConfigEditor extends React.Component {
   }
 
   handleKeyDown(event) {
-    if (event.key === 's' && (event.ctrlKey || event.metaKey)) {
+    if (event.key === 'p' && (event.ctrlKey || event.metaKey)) {
       event.preventDefault();
       this.props.onChange(this.state.code);
     }
@@ -101,7 +101,7 @@ class ViewConfigEditor extends React.Component {
         hide={this.state.hide}
         maxHeight={true}
         okayShortcut="⌘+Enter"
-        okayTitle="Save and Close"
+        okayTitle="Apply and Close"
         onCancel={this.props.onCancel}
         onOkay={this.handleSubmitBound}
         title="Edit View Config"
@@ -117,9 +117,9 @@ class ViewConfigEditor extends React.Component {
           </Button>
           <Button
             onClick={() => { this.props.onChange(this.state.code); }}
-            shortcut="⌘+S"
+            shortcut="⌘+P"
           >
-            Save
+            Preview
           </Button>
         </header>
         <div
