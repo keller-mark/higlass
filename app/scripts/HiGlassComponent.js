@@ -1072,17 +1072,17 @@ class HiGlassComponent extends React.Component {
       const minValues = lockedTracks
         // exclude tracks that don't set min and max values
         .filter(track => track.minRawValue && track.maxRawValue)
-        .map(track => (lockGroup.ignoreOffScreenValues
-          ? track.minRawValue()
-          : track.minVisibleValue(true)
+        .map(track => (lockGroup.ignoreOffScreenValues && track.getAggregatedVisibleValue
+          ? track.getAggregatedVisibleValue('min')
+          : track.minRawValue()
         ));
 
       const maxValues = lockedTracks
         // exclude tracks that don't set min and max values
         .filter(track => track.minRawValue && track.maxRawValue)
-        .map(track => (lockGroup.ignoreOffScreenValues
-          ? track.maxRawValue()
-          : track.maxVisibleValue(true)
+        .map(track => (lockGroup.ignoreOffScreenValues && track.getAggregatedVisibleValue
+          ? track.getAggregatedVisibleValue('max')
+          : track.maxRawValue()
         ));
 
       const allMin = Math.min(...minValues);
